@@ -8,6 +8,12 @@ function Fixtures(props) {
     const [show, setShow] = useState(false);
     const [homeTeam, setHomeTeam] = useState("");
     const [awayTeam, setAwayTeam] = useState("");
+    const [validated, setValidated] = useState(false);
+    const [serverState, setServerState] = useState({
+      submitting: false,
+      status: null,
+    });
+    
     const handleClose = (homeTeam, awayTeam) => {
       setShow(false);
       setHomeTeam("");
@@ -18,7 +24,53 @@ function Fixtures(props) {
       setHomeTeam(homeTeam);
       setAwayTeam(awayTeam);
     };
-  
+  const handleServerResponse = (ok, msg, form) => {
+    setServerState({
+      submitting: false,
+      status: { ok, msg },
+    });
+    if (ok) {
+      form.reset();
+      setValidated(false);
+    }
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      handleServerResponse(
+        false,
+        "Some error occurs while submiting. Please check your entries again.",
+        form
+      );
+    }
+
+    setValidated(true);
+    if (form.checkValidity() === true) {
+      setLoading(true);
+      setServerState({ submitting: true });
+      axios({
+        method: "post",
+        url: props.location.pathname,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        data: new FormData(form),
+      })
+        .then((r) => {
+          handleServerResponse(
+            true,
+            "Success! Thanks for your submission.",
+            form
+          );
+        })
+        .catch((r) => {
+          handleServerResponse(false, r.response.data.error, form);
+        });
+    }
+  };
+
     const fixtures = matches.filter((fixture) => fixture.status === 'SCHEDULED');
     var date2 = "";
     const dateToTime = (dates) =>
@@ -85,8 +137,15 @@ function Fixtures(props) {
                   <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Form name="requst_live" method="POST" data-netlify="true">
-                    <input
+                  <Form
+                    name="requst_live"
+                    method="POST"
+                    data-netlify="true"
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleOnSubmit}
+                  >
+                    <Form.Control
                       type="hidden"
                       name="form-name"
                       value="request-live"
