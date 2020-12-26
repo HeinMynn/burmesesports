@@ -41,45 +41,46 @@ function Home(props) {
       return () => clearInterval(intervalId);
     }, []);
     return (
-        <Container>
-          <h2>Coming Matches</h2>
-          <div className={loading ? "loading" : "hide"}></div>
-          <MatchesCheck />
-          <Row className="match-container">
-            {livematches.map((obj) => {
-              return (
-                <Match
-                  key = {`${obj.key}`}
-                  teamA={`${obj.teamA}`}
-                  teamB={`${obj.teamB}`}
-                  time={`${obj.time}`}
-                  date={`${obj.date}`}
-                  match={`${obj.match}`}
-                  link={`${obj.link}`}
-                  hide={`${obj.status}`}
-                />
-              );
-            })}
-          </Row>
-          <h2>Results</h2>
-          <div className={loading ? "loading" : "hide"}></div>
-          <Row className="match-container">
-            {pastmatches.map((obj) => {
-              return (
-                <Match
-                  key={`${obj.key}`}
-                  teamA={`${obj.teamA}`}
-                  teamB={`${obj.teamB}`}
-                  time={`${obj.time}`}
-                  date={`${obj.date}`}
-                  match={`${obj.match}`}
-                  link={`${obj.link}`}
-                  hide={`${obj.status}`}
-                />
-              );
-            })}
+      <Container>
+        <h2>Coming Matches</h2>
+        <div className={loading ? "loading" : "hide"}></div>
+        <MatchesCheck />
+        <Row className="match-container">
+          {livematches.map((obj) => {
+            return (
+              <Match
+                key={`${obj.key}`}
+                teamA={`${obj.teamA}`}
+                teamB={`${obj.teamB}`}
+                time={`${obj.time}`}
+                date={`${obj.date}`}
+                match={`${obj.match}`}
+                link={`${obj.link}`}
+                hide={`${obj.status}`}
+              />
+            );
+          })}
         </Row>
-        </Container>
+        <h2>Results</h2>
+
+        <div className={loading ? "loading" : "hide"}></div>
+        <Row className="match-container">
+          {pastmatches.map((obj) => {
+            return (
+              <Match
+                key={`${obj.key}`}
+                teamA={`${obj.teamA}`}
+                teamB={`${obj.teamB}`}
+                time={`${obj.time}`}
+                date={`${obj.date}`}
+                match={`${obj.match}`}
+                link={`${obj.link}`}
+                hide={`${obj.status}`}
+              />
+            );
+          })}
+        </Row>
+      </Container>
     );
 }
 
