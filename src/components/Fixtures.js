@@ -1,10 +1,24 @@
 import axios from 'axios';
+import { Button, Form, Modal } from "react-bootstrap";
 import React, { useEffect, useState } from 'react';
 
 function Fixtures(props) {
     const [matches, setMatches] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const [show, setShow] = useState(false);
+    const [homeTeam, setHomeTeam] = useState("");
+    const [awayTeam, setAwayTeam] = useState("");
+    const handleClose = (homeTeam, awayTeam) => {
+      setShow(false);
+      setHomeTeam("");
+      setAwayTeam("");
+    };
+    const handleShow = (homeTeam, awayTeam) => {
+      setShow(true);
+      setHomeTeam(homeTeam);
+      setAwayTeam(awayTeam);
+    };
+  
     const fixtures = matches.filter((fixture) => fixture.status === 'SCHEDULED');
     var date2 = "";
     const dateToTime = (dates) =>
@@ -26,9 +40,9 @@ function Fixtures(props) {
           })
           .then((res) => {
             const competitions = res.data;
-              setMatches(competitions.matches);
-              setLoading(false);
-            console.log(fixtures);
+            setMatches(competitions.matches);
+            setLoading(false);
+            // console.log(fixtures);
           });
     }, []);
     return (
@@ -60,6 +74,57 @@ function Fixtures(props) {
                   </span>
                 </span>
               </span>
+              <Button
+                variant="primary"
+                onClick={() => handleShow(obj.homeTeam.name, obj.awayTeam.name)}
+              >
+                Request Live Stream
+              </Button>
+              <Modal show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form name="requst_live" method="POST" data-netlify="true">
+                    <input
+                      type="hidden"
+                      name="form-name"
+                      value="request-live"
+                    />
+                    <Form.Group controlId="formBasicEmail">
+                      <Form.Label>Email address</Form.Label>
+                      <Form.Control type="email" placeholder="Enter email" />
+                      <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                      </Form.Text>
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicPassword">
+                      <Form.Control
+                        type="hidden"
+                        value={`${homeTeam} vs ${awayTeam}`}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicCheckbox">
+                      <Form.Check
+                        type="checkbox"
+                        label="I agree terms & conditions"
+                      />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                      Request
+                    </Button>
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={handleClose}>
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           );
         })}
