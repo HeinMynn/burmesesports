@@ -64,6 +64,7 @@ function Fixtures(props) {
             "Success! Thanks for your submission.",
             form
           );
+          setLoading(false);
         })
         .catch((r) => {
           handleServerResponse(false, r.response.data.error, form);
@@ -100,6 +101,17 @@ function Fixtures(props) {
     return (
       <div>
         <h2>Fixtures</h2>
+        {serverState.status && (
+          <p
+            className={
+              !serverState.status.ok
+                ? "errorMsg alert alert-danger"
+                : "alert alert-success"
+            }
+          >
+            {serverState.status.msg}
+          </p>
+        )}
         <div className={loading ? "loading" : "hide"}></div>
         {fixtures.map((obj) => {
           const localDate = new Date(obj.utcDate);
@@ -137,17 +149,6 @@ function Fixtures(props) {
                   <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  {serverState.status && (
-                    <p
-                      className={
-                        !serverState.status.ok
-                          ? "errorMsg alert alert-danger"
-                          : "alert alert-success"
-                      }
-                    >
-                      {serverState.status.msg}
-                    </p>
-                  )}
                   <Form
                     name="requst_live"
                     method="POST"
