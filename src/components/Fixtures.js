@@ -137,6 +137,17 @@ function Fixtures(props) {
                   <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                  {serverState.status && (
+                    <p
+                      className={
+                        !serverState.status.ok
+                          ? "errorMsg alert alert-danger"
+                          : "alert alert-success"
+                      }
+                    >
+                      {serverState.status.msg}
+                    </p>
+                  )}
                   <Form
                     name="requst_live"
                     method="POST"
