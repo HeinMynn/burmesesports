@@ -54,7 +54,7 @@ function Fixtures(props) {
       setServerState({ submitting: true });
       axios({
         method: "post",
-        url: props.location.pathname,
+        url: "/fixtures",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         data: new FormData(form),
       })
