@@ -61,11 +61,7 @@ function Fixtures(props) {
                 </span>
               </span>
             </span>
-            <Link to={`/request/${obj.homeTeam.name}/${obj.awayTeam.name}`}>
-              
-              Request Live
-            
-            </Link>
+            <Link to="/request">Request Live</Link>
           </div>
         );
       })}

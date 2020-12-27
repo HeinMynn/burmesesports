@@ -29,7 +29,7 @@ function App() {
             <Route path="/fixtures">
               <Fixtures />
             </Route>
-            <Route path="/request/:home/:away" component={Request} />
+            <Route path="/request/" component={Request} />
             <Route path="/results">
               <Results />
             </Route>

@@ -55,7 +55,7 @@ function Request(props) {
       setServerState({ submitting: true });
       axios({
         method: "post",
-        url: "/request",
+        url: props.location.pathname,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         data: new FormData(form),
       })
@@ -115,7 +115,7 @@ function Request(props) {
         <Form.Group controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="I agree terms & conditions" />
         </Form.Group>
-        <Button variant="primary" type="submit" name="request">
+        <Button variant="primary" type="submit">
           Request
         </Button>
       </Form>
