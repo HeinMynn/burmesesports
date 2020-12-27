@@ -16,22 +16,21 @@ function Request(props) {
 
   return (
     <div className="form-wrapper">
-          <Card className="bg-dark text-white">
-              <Card.Header>Request Live Streaming for {home} vs {away}</Card.Header>
+      <Card className="bg-dark text-white">
+        <Card.Header>
+          Request Live Streaming for {home} vs {away}
+        </Card.Header>
         <Card.Body>
-          <Form
-            name="requst"
-            method="POST"
-            data-netlify="true"
-          >
+          <Form name="requst" method="POST" data-netlify="true">
             <Form.Control type="hidden" name="form-name" value="request" />
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
-                              placeholder="Enter email"
+                placeholder="Enter email"
                               required
+                              className="w-50 m-auto"
               />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
