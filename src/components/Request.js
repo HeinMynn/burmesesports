@@ -1,15 +1,9 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 
-function simulateNetworkRequest() {
-  return new Promise((resolve) => setTimeout(resolve, 2000));
-}
-
 function Request(props) {
   const [loading, setLoading] = useState(true);
-  const [validated, setValidated] = useState(false);
   const { home } = useParams();
   const { away } = useParams();
   let history = useHistory();

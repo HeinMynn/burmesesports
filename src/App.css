@@ -215,7 +215,7 @@
     text-overflow: ellipsis;
     width: 100%;
 }
-.team{
+.fixture .team{
   text-align: left;
   display: inline-block;
     width: 50%;
@@ -223,7 +223,32 @@
     padding-right: 7rem;
     position: relative;
 }
-
+@media only screen and (max-width:768px){
+  .fixture .team{
+    padding-right:0;
+    padding-left: 4rem;
+  }
+  .fixture .team:first-of-type{
+    padding-right: 4rem;
+    padding-left: 0;
+  }
+  .fixture .team-name{
+    font-size: 0.8rem;
+    white-space: pre-line;
+  }
+  .fixture .score, .fixture time {
+    width: 6.6rem;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -3.2rem;
+    margin-top: -1.8rem;
+}
+.fixture .overview time{
+  font-size: 1.1rem;
+}
+}
 @keyframes load8 {
   0% {
     transform: rotate(0deg);

@@ -51,13 +51,17 @@ function Fixtures(props) {
             <span className="overview">
               <span className="teams">
                 <span className="team">
-                  <span className="team-name">{obj.homeTeam.name}</span>
+                  <span className="team-name">
+                    {obj.homeTeam.name.replace("FC", "")}
+                  </span>
                 </span>
                 <time dateTime={dateToTime(localDate)}>
                   {dateToTime(localDate)}
                 </time>
                 <span className="team">
-                  <span className="team-name">{obj.awayTeam.name}</span>
+                  <span className="team-name">
+                    {obj.awayTeam.name.replace("FC", "")}
+                  </span>
                 </span>
               </span>
             </span>

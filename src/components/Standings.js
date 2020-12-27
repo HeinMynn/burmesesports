@@ -20,22 +20,22 @@ function Standings(props) {
     return (
       <header className="header">
         <Container>
-                <Row>
-                    <h2>Standing Table</h2>
+          <Row>
+            <h2>Standing Table</h2>
             <Table striped responsive bordered hover variant="dark">
               <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Team</th>
-                    <th>P</th>
-                    <th>Pts</th>
-                    <th>W</th>
-                    <th>D</th>
-                    <th>L</th>
-                    <th>GF</th>
-                    <th>GA</th>
-                    <th>GD</th>
-                    <th>Form</th>
+                  <th>#</th>
+                  <th>Team</th>
+                  <th>Pl</th>
+                  <th>Pts</th>
+                  <th>W</th>
+                  <th>D</th>
+                  <th>L</th>
+                  <th>GF</th>
+                  <th>GA</th>
+                  <th>GD</th>
+                  <th>Form</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,7 +44,7 @@ function Standings(props) {
                     <tr key={obj.position}>
                       <td>{obj.position}</td>
                       <td className="team-name">
-                        <img src={obj.team.crestUrl} className="table-logo" />
+                              <img src={obj.team.crestUrl} className="table-logo" alt={obj.team.name}/>
                         <span className="d-none d-sm-inline">
                           {obj.team.name.replace("FC", "")}
                         </span>

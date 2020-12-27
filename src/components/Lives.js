@@ -34,7 +34,7 @@ function Lives(props) {
           const competitions = res.data;
           setMatches(competitions.matches);
           setLoading(false);
-          console.log(lives);
+          // console.log(lives);
         });
     }, []);
     return (
