@@ -6,7 +6,9 @@ function Lives(props) {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const lives = matches.filter((lives) => lives.status === "IN_PLAY");
+  const lives = matches.filter(
+    (lives) => lives.status === "IN_PLAY" || lives.status === "PAUSED"
+  );
 
   const MatchesCheck = () => {
     if (lives.length === 0 && loading === false) {
