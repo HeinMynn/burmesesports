@@ -1,7 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
+
+function simulateNetworkRequest() {
+  return new Promise((resolve) => setTimeout(resolve, 2000));
+}
 
 function Request(props) {
   const [loading, setLoading] = useState(true);
@@ -13,6 +17,14 @@ function Request(props) {
     submitting: false,
     status: null,
   });
+    
+    useEffect(() => {
+      if (loading) {
+        simulateNetworkRequest().then(() => {
+          setLoading(false);
+        });
+      }
+    }, [loading]);
   const handleServerResponse = (ok, msg, form) => {
     setServerState({
       submitting: false,
@@ -43,7 +55,7 @@ function Request(props) {
       setServerState({ submitting: true });
       axios({
         method: "post",
-        url: props.location.pathname,
+        url: "/request",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         data: new FormData(form),
       })
