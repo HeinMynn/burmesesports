@@ -3,6 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import Match from './Match';
 import Tabletop from "tabletop";
 import Alert from "react-bootstrap/Alert";
+import { Link } from "react-router-dom";
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -44,7 +45,12 @@ function Home(props) {
   }, []);
   return (
     <Container>
-      <h2>Coming Matches</h2>
+      <h2 className="heading display-6">Live Streams</h2>
+      <small className="text-muted">
+        
+        <Link to="/fixtures">See All Fixtures</Link>
+      
+      </small>
       <div className={loading ? "loading" : "hide"}></div>
       <MatchesCheck />
       <Row className="match-container">
@@ -63,8 +69,12 @@ function Home(props) {
           );
         })}
       </Row>
-      <h2>Results</h2>
-
+      <h2 className="heading display-6">Results</h2>
+      <small className="text-muted">
+        <Link to="/results" className="see-all">
+          See All Results
+        </Link>
+      </small>
       <div className={loading ? "loading" : "hide"}></div>
       <Row className="match-container">
         {pastmatches.map((obj) => {

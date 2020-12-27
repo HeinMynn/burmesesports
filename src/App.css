@@ -40,6 +40,19 @@
   color: #61dafb;
 }
 
+.heading{
+  display: inline-block;
+}
+
+.text-muted a{
+  text-decoration: none;
+  color: #db9831;
+  margin-left: 0.3em;
+}
+.text-muted a:hover{
+  text-decoration: dotted;
+  color: #dbad68;
+}
 .match-container{
   margin-bottom: 10px;
   min-height: 100px;
