@@ -45,11 +45,9 @@ function Home(props) {
   }, []);
   return (
     <Container>
-      <h2 className="heading display-6">Live Streams</h2>
+      <h2 className="heading display-6">Live Stream</h2>
       <small className="text-muted">
-        
         <Link to="/fixtures">See All Fixtures</Link>
-      
       </small>
       <div className={loading ? "loading" : "hide"}></div>
       <MatchesCheck />
