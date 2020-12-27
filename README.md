@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# A React WebApp for Premier League Standing, Fixtures & Results
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This web application is a simple app to see Premier League Standing, Fixtures & Results.
+
+And I also added some live data manually.
+
+This app use TableTop to retrieve data from Google Sheets and API from football-data.org to display the football data.
 
 ## Available Scripts
 
