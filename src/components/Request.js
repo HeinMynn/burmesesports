@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Card } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 
 function simulateNetworkRequest() {
@@ -16,42 +16,52 @@ function Request(props) {
 
   return (
     <div className="form-wrapper">
-      <Form
-        name="requst"
-        method="POST"
-        data-netlify="true"
-        noValidate
-        validated={validated}
-      >
-        <Form.Control type="hidden" name="form-name" value="request" />
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" name="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+          <Card className="bg-dark text-white">
+              <Card.Header>Request Live Streaming for {home} vs {away}</Card.Header>
+        <Card.Body>
+          <Form
+            name="requst"
+            method="POST"
+            data-netlify="true"
+          >
+            <Form.Control type="hidden" name="form-name" value="request" />
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                              placeholder="Enter email"
+                              required
+              />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Control
-            type="hidden"
-            name="match"
-            value={`${home} vs ${away}`}
-          />
-          <Form.Text className="text-muted">
-            Request Live Streaming for {home} vs {away}
-          </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="I agree terms & conditions" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Request
-        </Button>
-      </Form>
-      <Button variant="warning" onClick={history.goBack}>
-        Choose different match
-      </Button>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Control
+                type="hidden"
+                name="match"
+                value={`${home} vs ${away}`}
+              />
+              <Form.Text className="text-muted">
+                Request Live Streaming for {home} vs {away}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="I agree terms & conditions" />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Request
+            </Button>
+          </Form>
+        </Card.Body>
+        <Card.Footer>
+          <Button variant="warning" onClick={history.goBack}>
+            Choose different match
+          </Button>
+        </Card.Footer>
+      </Card>
     </div>
   );
 }
