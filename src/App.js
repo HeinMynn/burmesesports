@@ -11,6 +11,7 @@ import Standings from "./components/Standings";
 import Fixtures from "./components/Fixtures";
 import Lives from "./components/Lives";
 import Results from "./components/Results";
+import Request from "./components/Request";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/fixtures">
               <Fixtures />
             </Route>
+            <Route path="/request/:home/:away" component={Request} />
             <Route path="/results">
               <Results />
             </Route>
