@@ -26,6 +26,18 @@ function Lives(props) {
     }
   };
     useEffect(() => {
+      axios
+        .get("https://api.football-data.org/v2/competitions/PL/matches/", {
+          headers: {
+            "X-Auth-Token": "3aad16c1141f43f1889e56cb290b37e4",
+          },
+        })
+        .then((res) => {
+          const competitions = res.data;
+          setMatches(competitions.matches);
+          setLoading(false);
+          // console.log(lives);
+        });
       const intervalId = setInterval(() => {
         axios
           .get("https://api.football-data.org/v2/competitions/PL/matches/", {
