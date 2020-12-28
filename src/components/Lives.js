@@ -39,7 +39,7 @@ function Lives(props) {
             setLoading(false);
             // console.log(lives);
           });
-      }, 5000);
+      }, 30000);
       return () => clearInterval(intervalId);
     }, []);
     return (
