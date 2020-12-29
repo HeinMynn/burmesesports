@@ -12,8 +12,14 @@ import Fixtures from "./components/Fixtures";
 import Lives from "./components/Lives";
 import Results from "./components/Results";
 import Request from "./components/Request";
+import { PageView, initGA } from "./components/Tracking";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    initGA("UA-43406006-5");
+    PageView();
+  }, []);
   return (
     <Router>
       <Menu />
