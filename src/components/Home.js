@@ -4,6 +4,7 @@ import Match from './Match';
 import Tabletop from "tabletop";
 import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -45,6 +46,21 @@ function Home(props) {
   }, []);
   return (
     <Container>
+      <Helmet>
+        <script type="text/javascript">{`
+        atOptions = {
+            'key' : '3f59da4b039a9a15f3ef09ce6a8cef2d',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+          };
+`}</script>
+        <script
+          type="text/javascript"
+          src="https://jelqr4dqeep7.com/3f59da4b039a9a15f3ef09ce6a8cef2d/invoke.js"
+        />
+      </Helmet>
       <h2 className="heading display-6">Live Stream</h2>
       <small className="text-muted">
         <Link to="/fixtures">See All Fixtures</Link>

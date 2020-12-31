@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { HashLink as Anchor } from "react-router-hash-link";
 
@@ -36,11 +37,17 @@ function Fixtures(props) {
   }, []);
   return (
     <div>
-      <h2 id="top">
-        Fixtures
-      </h2>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Fixtures</title>
+      </Helmet>
+      <h2 id="top">Fixtures</h2>
       <small className="text-muted">
-        <Anchor to="/fixtures#tbc-matches">See Postponed Matches</Anchor>
+        <Anchor smooth to="/fixtures#tbc-matches">
+          
+          See Postponed Matches
+        
+        </Anchor>
       </small>
       <div className={loading ? "loading" : "hide"}></div>
       {fixtures.map((obj) => {
