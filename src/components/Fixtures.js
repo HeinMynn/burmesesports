@@ -3,19 +3,30 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { HashLink as Anchor } from "react-router-hash-link";
-import TeamFilter from "./Filter";
+import { Form } from "react-bootstrap";
 
 function Fixtures(props) {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [teams, setTeams] = useState([]);
+  const [team, setTeam] = useState("");
 
   let fixtures = matches.filter((fixture) => fixture.status === "SCHEDULED");
   const postponed = matches.filter((fixture) => fixture.status === "POSTPONED");
 
-  
+  function filterTeam(array, value) {
+    return array.filter((e) => {
+      return e.homeTeam.name === value || e.awayTeam.name === value;
+    });
+  }
 
-  
-  
+  if (team !== "") {
+    fixtures = filterTeam(fixtures, team);
+    // console.log(fixtures);
+  }
+  function handleTeams(e) {
+    return setTeam(e.target.value);
+  }
   
   var date2 = "";
   const dateToTime = (dates) =>
@@ -41,7 +52,18 @@ function Fixtures(props) {
         setLoading(false);
         // console.log(competitions.matches);
       });
-    
+    axios
+      .get("https://api.football-data.org/v2/competitions/PL/teams/", {
+        headers: {
+          "X-Auth-Token": "3aad16c1141f43f1889e56cb290b37e4",
+        },
+      })
+      .then((res) => {
+        const teams = res.data;
+        setTeams(teams.teams);
+        setLoading(false);
+        // console.log(teams.teams);
+      });
   }, []);
   return (
     <div>
@@ -51,7 +73,14 @@ function Fixtures(props) {
       </Helmet>
       <h2 id="top">Fixtures</h2>
       <div className={loading ? "loading" : "hide"}></div>
-      <TeamFilter />
+      <div className="filter-team">
+        <Form.Control as="select" onChange={handleTeams}>
+          <option>အသင်းရွေးပါ</option>
+          {teams.map((team) => {
+            return <option>{team.name}</option>;
+          })}
+        </Form.Control>
+      </div>
 
       <small className="text-muted">
         <Anchor smooth to="/fixtures#tbc-matches">
