@@ -30,10 +30,6 @@ function Results(props) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>Results</title>
-        <script
-          type="text/javascript"
-          src="//jelqr4dqeep7.com/4e/26/83/4e2683220c41b972f67aab0f2732b608.js"
-        ></script>
       </Helmet>
       <h2>Results</h2>
       <div className={loading ? "loading" : "hide"}></div>
