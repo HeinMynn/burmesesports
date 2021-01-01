@@ -3,13 +3,20 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { HashLink as Anchor } from "react-router-hash-link";
+import TeamFilter from "./Filter";
 
 function Fixtures(props) {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fixtures = matches.filter((fixture) => fixture.status === "SCHEDULED");
+  let fixtures = matches.filter((fixture) => fixture.status === "SCHEDULED");
   const postponed = matches.filter((fixture) => fixture.status === "POSTPONED");
+
+  
+
+  
+  
+  
   var date2 = "";
   const dateToTime = (dates) =>
     dates.toLocaleString("en-GB", {
@@ -34,6 +41,7 @@ function Fixtures(props) {
         setLoading(false);
         // console.log(competitions.matches);
       });
+    
   }, []);
   return (
     <div>
@@ -42,14 +50,15 @@ function Fixtures(props) {
         <title>Fixtures</title>
       </Helmet>
       <h2 id="top">Fixtures</h2>
+      <div className={loading ? "loading" : "hide"}></div>
+      <TeamFilter />
+
       <small className="text-muted">
         <Anchor smooth to="/fixtures#tbc-matches">
-          
           See Postponed Matches
-        
         </Anchor>
       </small>
-      <div className={loading ? "loading" : "hide"}></div>
+
       {fixtures.map((obj) => {
         const localDate = new Date(obj.utcDate);
         const matchday = FullDate(localDate);

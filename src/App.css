@@ -141,6 +141,10 @@
 .team-name{
   text-align: left;
 }
+.filter-team{
+  width: 50%;
+  margin: 0 auto;
+}
 .fixture{
   display: block;
     /* color: #242424; */
