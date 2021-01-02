@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from "react-helmet";
 
 function Results(props) {
   const [matches, setMatches] = useState([]);

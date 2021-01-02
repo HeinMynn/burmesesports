@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Alert from "react-bootstrap/Alert";
 import React, { useEffect, useState } from 'react';
+import { Helmet } from "react-helmet";
 
 function Lives(props) {
   const [matches, setMatches] = useState([]);
