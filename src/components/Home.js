@@ -31,6 +31,14 @@ function Home(props) {
   };
 
   useEffect(() => {
+    Tabletop.init({
+      key: "1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU",
+      callback: (googleData) => {
+        setData(googleData);
+        setLoading(false);
+      },
+      simpleSheet: true,
+    });
     const intervalId = setInterval(() => {
       Tabletop.init({
         key: "1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU",
