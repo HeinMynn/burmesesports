@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { HashLink as Anchor } from "react-router-hash-link";
 import { Form } from "react-bootstrap";
+import Iframe from "react-iframe";
 
 function Fixtures(props) {
   const [matches, setMatches] = useState([]);
@@ -71,6 +72,7 @@ function Fixtures(props) {
         <meta charSet="utf-8" />
         <title>Fixtures</title>
       </Helmet>
+
       <h2 id="top">Fixtures</h2>
       <div className={loading ? "loading" : "hide"}></div>
       <div className="filter-team">
@@ -88,7 +90,7 @@ function Fixtures(props) {
         </Anchor>
       </small>
 
-      {fixtures.map((obj) => {
+      {fixtures.map((obj, index) => {
         const localDate = new Date(obj.utcDate);
         const matchday = FullDate(localDate);
         var showDate = true;
@@ -96,6 +98,45 @@ function Fixtures(props) {
           showDate = false;
         }
         date2 = matchday;
+
+        if (index % 3 === 0 && index !== 0 && showDate === true) {
+          return (
+            <div key={obj.id} className="fixture preMatch">
+              <small>Advertisement</small>
+              <div className="ads">
+                <Iframe
+                  url="//jelqr4dqeep7.com/watchnew?key=3f59da4b039a9a15f3ef09ce6a8cef2d"
+                  width="728"
+                  height="90"
+                  frameborder="0"
+                  scrolling="no"
+                  align="center"
+                />
+              </div>
+              <span className="matchday">{showDate ? matchday : ""}</span>
+              <span className="overview">
+                <span className="teams">
+                  <span className="team">
+                    <span className="team-name">
+                      {obj.homeTeam.name.replace("FC", "")}
+                    </span>
+                  </span>
+                  <time dateTime={dateToTime(localDate)}>
+                    {dateToTime(localDate)}
+                  </time>
+                  <span className="team">
+                    <span className="team-name">
+                      {obj.awayTeam.name.replace("FC", "")}
+                    </span>
+                  </span>
+                </span>
+              </span>
+              <Link to={`/request/${obj.homeTeam.name}/${obj.awayTeam.name}`}>
+                Request Live
+              </Link>
+            </div>
+          );
+        }
 
         return (
           <div key={obj.id} className="fixture preMatch">

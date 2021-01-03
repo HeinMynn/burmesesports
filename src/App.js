@@ -15,6 +15,7 @@ import Request from "./components/Request";
 import { PageView, initGA } from "./components/Tracking";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import Iframe from "react-iframe";
 
 function App() {
   useEffect(() => {
@@ -26,6 +27,17 @@ function App() {
       <Menu />
       <div className="App">
         <header className="header">
+          <small>Advertisement</small>
+          <div className="ads">
+            <Iframe
+              url="//jelqr4dqeep7.com/watchnew?key=3f59da4b039a9a15f3ef09ce6a8cef2d"
+              width="728"
+              height="90"
+              frameborder="0"
+              scrolling="no"
+              align="center"
+            />
+          </div>
           <Switch>
             <Route path="/standings">
               <Standings />

@@ -4,6 +4,8 @@ import Match from './Match';
 import Tabletop from "tabletop";
 import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
+import Iframe from "react-iframe";
+import Helmet from "react-helmet";
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -52,53 +54,75 @@ function Home(props) {
     return () => clearInterval(intervalId);
   }, []);
   return (
-    <Container>
-      <h2 className="heading display-6">Live Stream</h2>
-      <small className="text-muted">
-        <Link to="/fixtures">See All Fixtures</Link>
-      </small>
-      <div className={loading ? "loading" : "hide"}></div>
-      <MatchesCheck />
-      <Row className="match-container">
-        {livematches.map((obj) => {
-          return (
-            <Match
-              key={`${obj.key}`}
-              teamA={`${obj.teamA}`}
-              teamB={`${obj.teamB}`}
-              time={`${obj.time}`}
-              date={`${obj.date}`}
-              match={`${obj.match}`}
-              link={`${obj.link}`}
-              hide={`${obj.status}`}
-            />
-          );
-        })}
-      </Row>
-      <h2 className="heading display-6">Results</h2>
-      <small className="text-muted">
-        <Link to="/results" className="see-all">
-          See All Results
-        </Link>
-      </small>
-      <div className={loading ? "loading" : "hide"}></div>
-      <Row className="match-container">
-        {pastmatches.map((obj) => {
-          return (
-            <Match
-              key={`${obj.key}`}
-              teamA={`${obj.teamA}`}
-              teamB={`${obj.teamB}`}
-              time={`${obj.time}`}
-              date={`${obj.date}`}
-              match={`${obj.match}`}
-              link={`${obj.link}`}
-              hide={`${obj.status}`}
-            />
-          );
-        })}
-      </Row>
-    </Container>
+    <div>
+      <Helmet>
+        <script
+          async="async"
+          data-cfasync="false"
+          src="//jelqr4dqeep7.com/0598f6fa244fae4bfda38c266a87dda5/invoke.js"
+        ></script>
+      </Helmet>
+      <Container>
+        <h2 className="heading display-6">Live Stream</h2>
+        <small className="text-muted">
+          <Link to="/fixtures">See All Fixtures</Link>
+        </small>
+        <div className={loading ? "loading" : "hide"}></div>
+        <MatchesCheck />
+        <Row className="match-container">
+          {livematches.map((obj) => {
+            return (
+              <Match
+                key={`${obj.key}`}
+                teamA={`${obj.teamA}`}
+                teamB={`${obj.teamB}`}
+                time={`${obj.time}`}
+                date={`${obj.date}`}
+                match={`${obj.match}`}
+                link={`${obj.link}`}
+                hide={`${obj.status}`}
+              />
+            );
+          })}
+        </Row>
+        <small>Advertisement</small>
+        <div className="ads">
+          <Iframe
+            url="//jelqr4dqeep7.com/watchnew?key=3f59da4b039a9a15f3ef09ce6a8cef2d"
+            width="728"
+            height="90"
+            frameborder="0"
+            scrolling="no"
+            align="center"
+          />
+        </div>
+        <h2 className="heading display-6">Results</h2>
+        <small className="text-muted">
+          <Link to="/results" className="see-all">
+            See All Results
+          </Link>
+        </small>
+        <div className={loading ? "loading" : "hide"}></div>
+        <Row className="match-container">
+          {pastmatches.map((obj) => {
+            return (
+              <Match
+                key={`${obj.key}`}
+                teamA={`${obj.teamA}`}
+                teamB={`${obj.teamB}`}
+                time={`${obj.time}`}
+                date={`${obj.date}`}
+                match={`${obj.match}`}
+                link={`${obj.link}`}
+                hide={`${obj.status}`}
+              />
+            );
+          })}
+        </Row>
+        <small>Advertisement</small>
+        <div id="container-0598f6fa244fae4bfda38c266a87dda5"></div>
+      </Container>
+    </div>
   );
 }
 

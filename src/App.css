@@ -2,7 +2,11 @@
   text-align: center;
   background-color: #282c34;
 }
-
+div.ads {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
