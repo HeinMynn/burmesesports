@@ -33,16 +33,8 @@ function Match(props) {
               to={`/player/${props.id}`}
               className={`button-link ${props.hide}`}
             >
-              Watch Live 1
+              Watch Live
             </Link>
-            <a
-              href={props.link}
-              className={`button-link ${props.hide}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Watch Live 2
-            </a>
           </Col>
           <Col xs={4} sm={3} className="team-container">
             <img

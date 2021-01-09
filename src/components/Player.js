@@ -11,7 +11,6 @@ function Player(props) {
   const { id } = useParams();
   let history = useHistory();
   const match = data.filter((match) => match.key === id);
-    console.log(match);
     
     const MatchesCheck = () => {
       if (match.length === 0 && loading === false) {
