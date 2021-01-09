@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 
 function Request(props) {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const { home } = useParams();
   const { away } = useParams();
   let history = useHistory();
@@ -23,8 +23,8 @@ function Request(props) {
                 type="email"
                 name="email"
                 placeholder="Enter email"
-                              required
-                              className="w-50 m-auto"
+                required
+                className="w-50 m-auto"
               />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.

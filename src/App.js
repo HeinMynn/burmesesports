@@ -12,10 +12,11 @@ import Fixtures from "./components/Fixtures";
 import Lives from "./components/Lives";
 import Results from "./components/Results";
 import Request from "./components/Request";
+import Player from "./components/Player";
 import { PageView, initGA } from "./components/Tracking";
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import Iframe from "react-iframe";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   useEffect(() => {
@@ -38,24 +39,27 @@ function App() {
               align="center"
             />
           </div>
-          <Switch>
-            <Route path="/standings">
-              <Standings />
-            </Route>
-            <Route path="/livescore">
-              <Lives />
-            </Route>
-            <Route path="/fixtures">
-              <Fixtures />
-            </Route>
-            <Route path="/request/:home/:away" component={Request} />
-            <Route path="/results">
-              <Results />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <HelmetProvider>
+            <Switch>
+              <Route path="/standings">
+                <Standings />
+              </Route>
+              <Route path="/livescore">
+                <Lives />
+              </Route>
+              <Route path="/fixtures">
+                <Fixtures />
+              </Route>
+              <Route path="/request/:home/:away" component={Request} />
+              <Route path="/player/:id" component={Player} />
+              <Route path="/results">
+                <Results />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </HelmetProvider>
           {/* <Footer /> */}
         </header>
       </div>

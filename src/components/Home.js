@@ -5,7 +5,7 @@ import Tabletop from "tabletop";
 import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
 import Iframe from "react-iframe";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -81,6 +81,7 @@ function Home(props) {
                 match={`${obj.match}`}
                 link={`${obj.link}`}
                 hide={`${obj.status}`}
+                id={`${obj.key}`}
               />
             );
           })}
@@ -115,6 +116,7 @@ function Home(props) {
                 match={`${obj.match}`}
                 link={`${obj.link}`}
                 hide={`${obj.status}`}
+                id={`${obj.key}`}
               />
             );
           })}

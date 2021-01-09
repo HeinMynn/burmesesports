@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { HashLink as Anchor } from "react-router-hash-link";
 import { Form } from "react-bootstrap";
@@ -74,12 +74,12 @@ function Fixtures(props) {
       </Helmet>
 
       <h2 id="top">Fixtures</h2>
-      <div className={loading ? "loading" : "hide"}></div>
+      <div className={loading ? "loading loading-mid" : "hide"}></div>
       <div className="filter-team">
         <Form.Control as="select" onChange={handleTeams}>
           <option>အသင်းရွေးပါ</option>
           {teams.map((team) => {
-            return <option>{team.name}</option>;
+            return <option key={team.id}>{team.name}</option>;
           })}
         </Form.Control>
       </div>

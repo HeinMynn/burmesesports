@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import ReactGA from "react-ga";
 
 export const initGA = (trackingID) => {
