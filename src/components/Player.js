@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tabs, Tab, Button } from "react-bootstrap";
+import { Tabs, Tab, Button, Alert } from "react-bootstrap";
 import ReactHlsPlayer from "react-hls-player";
 import { useHistory, useParams } from "react-router-dom";
 import Tabletop from "tabletop";
@@ -11,7 +11,21 @@ function Player(props) {
   const { id } = useParams();
   let history = useHistory();
   const match = data.filter((match) => match.key === id);
-  console.log(match);
+    console.log(match);
+    
+    const MatchesCheck = () => {
+      if (match.length === 0 && loading === false) {
+        return (
+          <Alert variant="warning">
+            <Alert.Heading>Finding Live Streaming ... </Alert.Heading>
+            Live Stream will be available <b>1 HOUR</b> before the match.{" "}
+          </Alert>
+        );
+      } else {
+        return null;
+      }
+    };
+
   useEffect(() => {
     Tabletop.init({
       key: "1Y6FocRKVVw-SCPNqHD8c-C96F6z43fbNHUprkIRbGbs",
@@ -25,7 +39,7 @@ function Player(props) {
   return (
     <div>
       <div className={loading ? "loading loading-mid" : "hide"}></div>
-
+      <MatchesCheck />
       <Tabs
         transition={false}
         // defaultActiveKey="profile"
