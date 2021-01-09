@@ -127,7 +127,9 @@ div.ads {
   display: inline-block;
   margin-right: 5px;
 }
-
+video{
+  max-width: 96%;
+}
 .loading:empty {
   position: absolute;
   /* top: calc(50% - 4em); */
