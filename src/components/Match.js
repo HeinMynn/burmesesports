@@ -16,7 +16,7 @@ function Match(props) {
             <img
               src={`images/${props.teamA}.png`}
               className="team-logo"
-              alt={props.date}
+              alt={props.teamA}
             />
           </Col>
           <Col xs={4} sm={6}>
@@ -40,7 +40,7 @@ function Match(props) {
             <img
               src={`images/${props.teamB}.png`}
               className="team-logo"
-              alt={props.team2}
+              alt={props.teamB}
             />
           </Col>
         </Row>
