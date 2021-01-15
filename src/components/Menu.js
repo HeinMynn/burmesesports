@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
-
+import { FcAndroidOs } from "react-icons/fc";
 function Menu(props) {
     return (
       <div>
@@ -16,6 +16,14 @@ function Menu(props) {
                 <NavDropdown.Item href="/fixtures">Fixtures</NavDropdown.Item>
                 <NavDropdown.Item href="/results">Results</NavDropdown.Item>
               </NavDropdown>
+            </Nav>
+            <Nav>
+              <Nav.Link
+                href="https://drive.google.com/file/d/1z08SNI2IU1L-PX7AaRlaF_-9QhrtRxIm/view?usp=sharing"
+                target="_blank"
+              >
+                <FcAndroidOs /> Download APK
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

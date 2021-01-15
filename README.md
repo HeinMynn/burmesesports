@@ -6,6 +6,9 @@ And I also added some live data manually.
 
 This app use TableTop to retrieve data from Google Sheets and API from football-data.org to display the football data.
 
+# Demo
+https://bstv1.netlify.app
+
 ## Available Scripts
 
 In the project directory, you can run:
