@@ -17,6 +17,7 @@ import { PageView, initGA } from "./components/Tracking";
 import { useEffect } from "react";
 import Iframe from "react-iframe";
 import { HelmetProvider } from "react-helmet-async";
+import Footer from "./components/Footer";
 
 function App() {
   useEffect(() => {
@@ -60,8 +61,8 @@ function App() {
               </Route>
             </Switch>
           </HelmetProvider>
-          {/* <Footer /> */}
         </header>
+        <Footer />
       </div>
     </Router>
   );
