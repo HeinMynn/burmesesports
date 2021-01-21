@@ -19,6 +19,16 @@ function Menu(props) {
             </Nav>
             <Nav>
               <Nav.Link
+                href="https://play.google.com/store/apps/details?id=com.bizzetek.bstv"
+                target="_blank"
+              >
+                <img
+                  src="/images/playstore.png"
+                  className="playstore"
+                  alt="get it on playstore"
+                />
+              </Nav.Link>
+              <Nav.Link
                 href="https://drive.google.com/file/d/1z08SNI2IU1L-PX7AaRlaF_-9QhrtRxIm/view?usp=sharing"
                 target="_blank"
               >

@@ -3,6 +3,7 @@ import { Tabs, Tab, Button, Alert } from "react-bootstrap";
 import ReactHlsPlayer from "react-hls-player";
 import { useHistory, useParams } from "react-router-dom";
 import Tabletop from "tabletop";
+import Iframe from "react-iframe";
 
 function Player(props) {
   const [data, setData] = useState([]);
@@ -46,7 +47,30 @@ function Player(props) {
         onSelect={() => setPause(false)}
         onBlur={() => setPause(true)}
       >
-        {match.map((obj) => {
+        {match.slice(0, 1).map((obj) => {
+          if (obj.title !== "iframe") {
+            return null;
+          } else {
+            return (
+              <Tab eventKey={obj.title} title={obj.title}>
+                <div className="ads">
+                  <Iframe
+                    allow="encrypted-media"
+                    width="640"
+                    height="360"
+                    marginwidth="0"
+                    marginheight="0"
+                    scrolling="no"
+                    frameborder="0"
+                    allowFullScreen="true"
+                    url={obj.link}
+                  />
+                </div>
+              </Tab>
+            );
+          }
+        })}
+        {match.slice(1).map((obj) => {
           return (
             <Tab eventKey={obj.title} title={obj.title}>
               <ReactHlsPlayer
