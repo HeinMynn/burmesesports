@@ -5,7 +5,12 @@ function Footer(props) {
   return (
     <div className="footer">
       Made with <FaHeart className="heart" /> By{" "}
-      <a href="https://idigitalnews.com" target="_blank" rel="noreferrer">
+      <a
+        href="https://idigitalnews.com"
+        target="_blank"
+        rel="noreferrer"
+        className="footer-title"
+      >
         iDigital News
       </a>
     </div>

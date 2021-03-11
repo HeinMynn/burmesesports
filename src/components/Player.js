@@ -52,7 +52,7 @@ function Player(props) {
             return null;
           } else {
             return (
-              <Tab eventKey={obj.title} title={obj.title}>
+              <Tab key={obj.link} eventKey={obj.title} title={obj.title}>
                 <div className="ads">
                   <Iframe
                     allow="encrypted-media"
@@ -72,7 +72,7 @@ function Player(props) {
         })}
         {match.slice(1).map((obj) => {
           return (
-            <Tab eventKey={obj.title} title={obj.title}>
+            <Tab key={obj.link} eventKey={obj.title} title={obj.title}>
               <ReactHlsPlayer
                 url={obj.link}
                 autoplay={false}
