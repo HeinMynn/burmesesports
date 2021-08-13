@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Tabs, Tab, Button, Alert } from "react-bootstrap";
 import ReactHlsPlayer from "react-hls-player";
 import { useHistory, useParams } from "react-router-dom";
-import Tabletop from "tabletop";
 import Iframe from "react-iframe";
+import { readRemoteFile } from "react-papaparse";
 
 function Player(props) {
   const [data, setData] = useState([]);
@@ -12,29 +12,33 @@ function Player(props) {
   const { id } = useParams();
   let history = useHistory();
   const match = data.filter((match) => match.key === id);
-    
-    const MatchesCheck = () => {
-      if (match.length === 0 && loading === false) {
-        return (
-          <Alert variant="warning">
-            <Alert.Heading>Finding Live Streaming ... </Alert.Heading>
-            Live Stream will be available <b>1 HOUR</b> before the match.{" "}
-          </Alert>
-        );
-      } else {
-        return null;
-      }
-    };
+
+  const MatchesCheck = () => {
+    if (match.length === 0 && loading === false) {
+      return (
+        <Alert variant="warning">
+          <Alert.Heading>Finding Live Streaming ... </Alert.Heading>
+          Live Stream will be available <b>1 HOUR</b> before the match.{" "}
+        </Alert>
+      );
+    } else {
+      return null;
+    }
+  };
 
   useEffect(() => {
-    Tabletop.init({
-      key: "1Y6FocRKVVw-SCPNqHD8c-C96F6z43fbNHUprkIRbGbs",
-      callback: (googleData) => {
-        setData(googleData);
-        setLoading(false);
-      },
-      simpleSheet: true,
-    });
+    readRemoteFile(
+      "https://docs.google.com/spreadsheets/d/1Y6FocRKVVw-SCPNqHD8c-C96F6z43fbNHUprkIRbGbs/pub?output=csv",
+      {
+        header: true,
+        download: true,
+        complete: (results) => {
+          console.log(results);
+          setData(results.data);
+          setLoading(false);
+        },
+      }
+    );
   }, []);
   return (
     <div>

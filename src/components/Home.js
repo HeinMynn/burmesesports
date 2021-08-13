@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import Match from './Match';
-import Tabletop from "tabletop";
+import Match from "./Match";
 import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
 import Iframe from "react-iframe";
 import { Helmet } from "react-helmet-async";
+import { readRemoteFile } from "react-papaparse";
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -33,23 +33,31 @@ function Home(props) {
   };
 
   useEffect(() => {
-    Tabletop.init({
-      key: "1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU",
-      callback: (googleData) => {
-        setData(googleData);
-        setLoading(false);
-      },
-      simpleSheet: true,
-    });
-    const intervalId = setInterval(() => {
-      Tabletop.init({
-        key: "1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU",
-        callback: (googleData) => {
-          setData(googleData);
+    readRemoteFile(
+      "https://docs.google.com/spreadsheets/d/1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU/pub?output=csv",
+      {
+        download: true,
+        header: true,
+        complete: (results) => {
+          console.log(results);
+          setData(results.data);
           setLoading(false);
         },
-        simpleSheet: true,
-      });
+      }
+    );
+    const intervalId = setInterval(() => {
+      readRemoteFile(
+        "https://docs.google.com/spreadsheets/d/1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU/pub?output=csv",
+        {
+          download: true,
+          header: true,
+          complete: (results) => {
+            console.log(results);
+            setData(results.data);
+            setLoading(false);
+          },
+        }
+      );
     }, 1000);
     return () => clearInterval(intervalId);
   }, []);
