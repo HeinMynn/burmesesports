@@ -9,6 +9,7 @@
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "cloudinary-react": "^1.7.0",
     "postcss": "^7.0.35",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",

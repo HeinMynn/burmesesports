@@ -22,9 +22,6 @@ function Home(props) {
         <Alert variant="warning">
           <Alert.Heading>No Live Match!</Alert.Heading>
           There is no upcoming match.{" "}
-          <Alert.Link href="https://sports.idigitalnews.com/category/news">
-            Read Latest Football News.
-          </Alert.Link>
         </Alert>
       );
     } else {

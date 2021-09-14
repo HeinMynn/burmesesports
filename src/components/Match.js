@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {CloudinaryContext, Image} from "cloudinary-react";
 
 function Match(props) {
   let formatTwoDigits = (digit) => ("0" + digit).slice(-2);
@@ -13,11 +14,9 @@ function Match(props) {
       <div className="match-card">
         <Row>
           <Col xs={4} sm={3} className="team-container">
-            <img
-              src={`images/${props.teamA}.png`}
-              className="team-logo"
-              alt={props.teamA}
-            />
+          <CloudinaryContext cloudName="burmese-sports" className="inline">
+              <Image publicId={`bstv/${props.teamA}`} width="50" className="team-logo"/>
+          </CloudinaryContext>
           </Col>
           <Col xs={4} sm={6}>
             <span className={props.hide === "playing" ? "play" : "hide"}>
@@ -37,11 +36,9 @@ function Match(props) {
             </Link>
           </Col>
           <Col xs={4} sm={3} className="team-container">
-            <img
-              src={`images/${props.teamB}.png`}
-              className="team-logo"
-              alt={props.teamB}
-            />
+          <CloudinaryContext cloudName="burmese-sports" className="inline">
+              <Image publicId={`bstv/${props.teamB}`} width="50" className="team-logo"/>
+          </CloudinaryContext>
           </Col>
         </Row>
       </div>
