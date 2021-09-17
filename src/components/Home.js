@@ -1,63 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Match from "./Match";
-import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
 import Iframe from "react-iframe";
 import { Helmet } from "react-helmet-async";
-import { readRemoteFile } from "react-papaparse";
+// import { useGetData } from "../hooks/useGetData";
+import db from '../firebase.config';
 
 function Home(props) {
-  const [data, setData] = useState([]);
+    const [documents, setDocuments] = useState([])
 
-  const [loading, setLoading] = useState(true);
+    const FullDate = (dates) =>
+      dates.toLocaleString("en-GB", {
+        dateStyle: "long",
+      });
 
-  const livematches = data.filter(
-    (live) => live.status === "live" || live.status === "playing"
-  );
-  const pastmatches = data.filter((past) => past.status === "hide");
-  const MatchesCheck = () => {
-    if (livematches.length === 0 && loading === false) {
-      return (
-        <Alert variant="warning">
-          <Alert.Heading>No Live Match!</Alert.Heading>
-          There is no upcoming match.{" "}
-        </Alert>
-      );
-    } else {
-      return null;
+      const dateToTime = (dates) =>
+        dates.toLocaleString("en-GB", {
+          hour12: false,
+          hour: "2-digit",
+          minute: "numeric",
+        });
+    let liveMatches = documents.filter((match)=>match.status === 'live');
+    let pastMatches = documents.filter((match)=>match.status==="ft");
+ 
+    const fetchMatches=async()=>{
+        const response=db.collection('matches');
+        response.get().then((querySnapshot) => {
+          const tempDoc = querySnapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() }
+          })
+          setDocuments(tempDoc)
+        })
     }
-  };
-
-  useEffect(() => {
-    readRemoteFile(
-      "https://docs.google.com/spreadsheets/d/1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU/pub?output=csv",
-      {
-        download: true,
-        header: true,
-        complete: (results) => {
-          console.log(results);
-          setData(results.data);
-          setLoading(false);
-        },
-      }
-    );
-    const intervalId = setInterval(() => {
-      readRemoteFile(
-        "https://docs.google.com/spreadsheets/d/1Nj7lCM4_Rij_Bd2dE3qBpAj5a8s4snrquEezy149vQU/pub?output=csv",
-        {
-          download: true,
-          header: true,
-          complete: (results) => {
-            console.log(results);
-            setData(results.data);
-            setLoading(false);
-          },
-        }
-      );
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+    useEffect(() => {
+        fetchMatches();
+    }, []);
   return (
     <div>
       <Helmet>
@@ -72,21 +50,24 @@ function Home(props) {
         <small className="text-muted">
           <Link to="/fixtures">See All Fixtures</Link>
         </small>
-        <div className={loading ? "loading" : "hide"}></div>
-        <MatchesCheck />
+        {/* <div className={loading ? "loading" : "hide"}></div> */}
+        {/* <MatchesCheck /> */}
         <Row className="match-container">
-          {livematches.map((obj) => {
+          {liveMatches.map((obj) => {
+            let raw_date = new Date(obj.matchday.seconds*1000);
+            let matchday = FullDate(raw_date)
+            let kickoff = dateToTime(raw_date);
             return (
               <Match
-                key={`${obj.key}`}
+                key={`${obj.id}`}
                 teamA={`${obj.teamA}`}
                 teamB={`${obj.teamB}`}
-                time={`${obj.time}`}
-                date={`${obj.date}`}
-                match={`${obj.match}`}
+                time={`${kickoff}`}
+                matchday={`${matchday}`}
+                match={`${obj.competition}`}
                 link={`${obj.link}`}
                 hide={`${obj.status}`}
-                id={`${obj.key}`}
+                id={`${obj.id}`}
               />
             );
           })}
@@ -108,20 +89,23 @@ function Home(props) {
             See All Results
           </Link>
         </small>
-        <div className={loading ? "loading" : "hide"}></div>
+        {/* <div className={loading ? "loading" : "hide"}></div> */}
         <Row className="match-container">
-          {pastmatches.map((obj) => {
+          {pastMatches.map((obj) => {
+            let raw_date = new Date(obj.matchday.seconds*1000);
+            let matchday = FullDate(raw_date)
+
             return (
               <Match
-                key={`${obj.key}`}
+                key={`${obj.id}`}
                 teamA={`${obj.teamA}`}
                 teamB={`${obj.teamB}`}
-                time={`${obj.time}`}
-                date={`${obj.date}`}
-                match={`${obj.match}`}
+                time={`${obj.homeScore} - ${obj.awayScore}`}
+                matchday={`${matchday}`}
+                match={`${obj.competition}`}
                 link={`${obj.link}`}
                 hide={`${obj.status}`}
-                id={`${obj.key}`}
+                id={`${obj.id}`}
               />
             );
           })}

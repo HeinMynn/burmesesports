@@ -9,6 +9,9 @@ function Match(props) {
   var date = `${formatTwoDigits(tempDate.getDate())}-${formatTwoDigits(
     tempDate.getMonth() + 1
   )}-${tempDate.getFullYear()}`;
+  // var matchday = new Date(props.matchday*1000)
+  // console.log(props.matchday.Timestamp)
+  // var date = new Date(props.matchday.seconds * 1000 + props.matchday.nanoseconds/1000000)
   return (
     <Col sm={12} md={6} xl={4}>
       <div className="match-card">
@@ -20,17 +23,17 @@ function Match(props) {
           </Col>
           <Col xs={4} sm={6}>
             <span className={props.hide === "playing" ? "play" : "hide"}>
-              Live
+              Live 
             </span>
             <span className="match-type">{props.match}</span>
             <br />
             <span className="match-time">{props.time}</span>
             <br />
-            <span className="match-date">{props.date ? props.date : date}</span>
+            <span className="match-date">{props.matchday ? props.matchday : date}</span>
             <br />
             <Link
               to={`/player/${props.id}`}
-              className={`button-link ${props.hide}`}
+              className={`button-link ${props.hide === "ft"?"hide":""}`}
             >
               Watch Live
             </Link>

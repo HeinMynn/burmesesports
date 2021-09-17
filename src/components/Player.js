@@ -3,7 +3,7 @@ import { Tabs, Tab, Button, Alert } from "react-bootstrap";
 import ReactHlsPlayer from "react-hls-player";
 import { useHistory, useParams } from "react-router-dom";
 import Iframe from "react-iframe";
-import { readRemoteFile } from "react-papaparse";
+import db from '../firebase.config';
 
 function Player(props) {
   const [data, setData] = useState([]);
@@ -11,10 +11,11 @@ function Player(props) {
   const [pause, setPause] = useState(true);
   const { id } = useParams();
   let history = useHistory();
-  const match = data.filter((match) => match.key === id);
+  // const match = data.filter((match) => match.key === id);
+  let i = 0;
 
   const MatchesCheck = () => {
-    if (match.length === 0 && loading === false) {
+    if (data.length === 0 && loading === false) {
       return (
         <Alert variant="warning">
           <Alert.Heading>Finding Live Streaming ... </Alert.Heading>
@@ -26,20 +27,18 @@ function Player(props) {
     }
   };
 
-  useEffect(() => {
-    readRemoteFile(
-      "https://docs.google.com/spreadsheets/d/1Y6FocRKVVw-SCPNqHD8c-C96F6z43fbNHUprkIRbGbs/pub?output=csv",
-      {
-        header: true,
-        download: true,
-        complete: (results) => {
-          console.log(results);
-          setData(results.data);
-          setLoading(false);
-        },
-      }
-    );
-  }, []);
+  const fetchMatch=async()=>{
+    const response=db.collection('matches').doc(id);
+    response.get().then((querySnapshot) => {
+        setData(querySnapshot.data())
+        setLoading(false);
+      
+      console.log(querySnapshot.data())
+    })
+}
+useEffect(() => {
+    fetchMatch();
+}, []);
   return (
     <div>
       <div className={loading ? "loading loading-mid" : "hide"}></div>
@@ -51,12 +50,10 @@ function Player(props) {
         onSelect={() => setPause(false)}
         onBlur={() => setPause(true)}
       >
-        {match.slice(0, 1).map((obj) => {
-          if (obj.title !== "iframe") {
-            return null;
-          } else {
+        {data.iframe && data.iframe.map((obj) => {
+          i++
             return (
-              <Tab key={obj.link} eventKey={obj.title} title={obj.title}>
+              <Tab key={obj} eventKey={obj} title={`Live ${i}`}>
                 <div className="ads">
                   <Iframe
                     allow="encrypted-media"
@@ -73,12 +70,13 @@ function Player(props) {
               </Tab>
             );
           }
-        })}
-        {match.slice(1).map((obj) => {
+        )}
+        {data.stream && data.stream.map((obj) => {
+          i++
           return (
-            <Tab key={obj.link} eventKey={obj.title} title={obj.title}>
+            <Tab key={obj} eventKey={obj} title={`Live ${i}`}>
               <ReactHlsPlayer
-                url={obj.link}
+                url={obj}
                 autoplay={false}
                 controls={true}
                 pause={pause}
