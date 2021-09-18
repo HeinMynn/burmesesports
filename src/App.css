@@ -34,7 +34,7 @@ div.ads {
 
 @media (prefers-reduced-motion: no-preference) {
   .click-logo {
-    animation: App-logo-spin infinite 1s linear;
+    animation: load8 infinite 1s linear;
   }
 }
 

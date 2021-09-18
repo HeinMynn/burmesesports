@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import Iframe from "react-iframe";
 import { Helmet } from "react-helmet-async";
 // import { useGetData } from "../hooks/useGetData";
-import db from '../firebase.config';
+import app from '../firebase.config';
 
 function Home(props) {
     const [documents, setDocuments] = useState([])
-
+    const db=app.firestore();
     const FullDate = (dates) =>
       dates.toLocaleString("en-GB", {
         dateStyle: "long",

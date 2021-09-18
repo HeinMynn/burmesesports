@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import Iframe from "react-iframe";
 import { HelmetProvider } from "react-helmet-async";
 import Footer from "./components/Footer";
+import SignIn from "./admin/SignIn";
 
 function App() {
   useEffect(() => {
@@ -51,6 +52,7 @@ function App() {
               <Route path="/fixtures">
                 <Fixtures />
               </Route>
+              <Route path="/admin/signin" component={SignIn} />
               <Route path="/request/:home/:away" component={Request} />
               <Route path="/player/:id" component={Player} />
               <Route path="/results">

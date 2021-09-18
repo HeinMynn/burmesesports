@@ -3,7 +3,7 @@ import { Tabs, Tab, Button, Alert } from "react-bootstrap";
 import ReactHlsPlayer from "react-hls-player";
 import { useHistory, useParams } from "react-router-dom";
 import Iframe from "react-iframe";
-import db from '../firebase.config';
+import app from '../firebase.config';
 
 function Player(props) {
   const [data, setData] = useState([]);
@@ -11,6 +11,8 @@ function Player(props) {
   const [pause, setPause] = useState(true);
   const { id } = useParams();
   let history = useHistory();
+
+  const db=app.firestore();
   // const match = data.filter((match) => match.key === id);
   let i = 0;
 
@@ -64,7 +66,7 @@ useEffect(() => {
                     scrolling="no"
                     frameborder="0"
                     allowFullScreen="true"
-                    url={obj.link}
+                    url={obj}
                   />
                 </div>
               </Tab>
