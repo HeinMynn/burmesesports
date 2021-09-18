@@ -17,7 +17,7 @@ function Player(props) {
   let i = 0;
 
   const MatchesCheck = () => {
-    if (data.length === 0 && loading === false) {
+    if (!data.stream && loading === false) {
       return (
         <Alert variant="warning">
           <Alert.Heading>Finding Live Streaming ... </Alert.Heading>
@@ -34,8 +34,6 @@ function Player(props) {
     response.get().then((querySnapshot) => {
         setData(querySnapshot.data())
         setLoading(false);
-      
-      console.log(querySnapshot.data())
     })
 }
 useEffect(() => {

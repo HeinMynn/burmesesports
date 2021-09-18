@@ -14,7 +14,6 @@ function Standings(props) {
           .then((res) => {
             const standings = res.data;
               setStanding(standings.standings[0].table);
-              console.log(standings.standings[0])
           });
     },[])
     return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import firebase from 'firebase';
-import app from "../firebase.config";
+// import app from "../firebase.config";
 import { useForm } from 'react-hook-form';
 import { login } from './auth/Auth';
 import { FaSpinner } from 'react-icons/fa';
