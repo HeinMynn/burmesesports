@@ -17,31 +17,41 @@ function Match(props) {
       <div className="match-card">
         <Row>
           <Col xs={4} sm={3} className="team-container">
-          <CloudinaryContext cloudName="burmese-sports" className="inline">
-              <Image publicId={`bstv/${props.teamA}`} width="50" className="team-logo"/>
-          </CloudinaryContext>
+            <CloudinaryContext cloudName="burmese-sports" className="inline">
+              <Image
+                publicId={`bstv/${props.teamA}.png`}
+                width="50"
+                className="team-logo"
+              />
+            </CloudinaryContext>
           </Col>
           <Col xs={4} sm={6}>
             <span className={props.hide === "playing" ? "play" : "hide"}>
-              Live 
+              Live
             </span>
             <span className="match-type">{props.match}</span>
             <br />
             <span className="match-time">{props.time}</span>
             <br />
-            <span className="match-date">{props.matchday ? props.matchday : date}</span>
+            <span className="match-date">
+              {props.matchday ? props.matchday : date}
+            </span>
             <br />
             <Link
               to={`/player/${props.id}`}
-              className={`button-link ${props.hide === "ft"?"hide":""}`}
+              className={`button-link ${props.hide === "ft" ? "hide" : ""}`}
             >
               Watch Live
             </Link>
           </Col>
           <Col xs={4} sm={3} className="team-container">
-          <CloudinaryContext cloudName="burmese-sports" className="inline">
-              <Image publicId={`bstv/${props.teamB}`} width="50" className="team-logo"/>
-          </CloudinaryContext>
+            <CloudinaryContext cloudName="burmese-sports" className="inline">
+              <Image
+                publicId={`bstv/${props.teamB}.png`}
+                width="50"
+                className="team-logo"
+              />
+            </CloudinaryContext>
           </Col>
         </Row>
       </div>
