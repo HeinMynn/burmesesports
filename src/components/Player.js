@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Tabs, Tab, Button, Alert } from "react-bootstrap";
+import { Tabs, Tab, Button, Alert, Row, Col, Container } from "react-bootstrap";
 import ReactHlsPlayer from "react-hls-player";
 import { useHistory, useParams } from "react-router-dom";
 import Iframe from "react-iframe";
-import app from '../firebase.config';
+import app from "../firebase.config";
 
 function Player(props) {
   const [data, setData] = useState([]);
@@ -12,7 +12,7 @@ function Player(props) {
   const { id } = useParams();
   let history = useHistory();
 
-  const db=app.firestore();
+  const db = app.firestore();
   // const match = data.filter((match) => match.key === id);
   let i = 0;
 
@@ -29,16 +29,16 @@ function Player(props) {
     }
   };
 
-  const fetchMatch=async()=>{
-    const response=db.collection('matches').doc(id);
+  const fetchMatch = async () => {
+    const response = db.collection("matches").doc(id);
     response.get().then((querySnapshot) => {
-        setData(querySnapshot.data())
-        setLoading(false);
-    })
-}
-useEffect(() => {
+      setData(querySnapshot.data());
+      setLoading(false);
+    });
+  };
+  useEffect(() => {
     fetchMatch();
-}, []);
+  }, []);
   return (
     <div>
       <div className={loading ? "loading loading-mid" : "hide"}></div>
@@ -50,8 +50,9 @@ useEffect(() => {
         onSelect={() => setPause(false)}
         onBlur={() => setPause(true)}
       >
-        {data.iframe && data.iframe.map((obj) => {
-          i++
+        {data.iframe &&
+          data.iframe.map((obj) => {
+            i++;
             return (
               <Tab key={obj} eventKey={obj} title={`Live ${i}`}>
                 <div className="ads">
@@ -69,23 +70,27 @@ useEffect(() => {
                 </div>
               </Tab>
             );
-          }
-        )}
-        {data.stream && data.stream.map((obj) => {
-          i++
-          return (
-            <Tab key={obj} eventKey={obj} title={`Live ${i}`}>
-              <ReactHlsPlayer
-                url={obj}
-                autoplay={false}
-                controls={true}
-                pause={pause}
-                width={500}
-                height={375}
-              />
-            </Tab>
-          );
-        })}
+          })}
+        {data.stream &&
+          data.stream.map((obj) => {
+            i++;
+            return (
+              <Tab key={obj} eventKey={obj} title={`Live ${i}`}>
+                <Container>
+                  <Row>
+                    <Col>
+                      <ReactHlsPlayer
+                        url={obj}
+                        autoplay={false}
+                        controls={true}
+                        pause={pause}
+                      />
+                    </Col>
+                  </Row>
+                </Container>
+              </Tab>
+            );
+          })}
       </Tabs>
       <Button variant="warning" onClick={history.goBack}>
         Watch Another Match
